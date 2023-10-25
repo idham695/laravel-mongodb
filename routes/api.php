@@ -27,6 +27,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // Route::post('logout', [UserController::class, 'logout']);
     Route::prefix('barang')->group(function() {
         Route::get('/', [BarangController::class, 'index']);
+        Route::get('/{id}', [BarangController::class, 'show']);
         Route::post('/store', [BarangController::class, 'store']);
+        Route::post('/update/{id}', [BarangController::class, 'update']);
+        Route::post('/delete/{id}', [BarangController::class, 'delete']);
     });
 });
