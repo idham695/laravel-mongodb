@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,10 @@ use App\Http\Controllers\UserController;
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 Route::group(['middleware' => ['jwt.verify']], function () {
-    Route::post('refresh', [UserController::class, 'refresh']);
-    Route::post('logout', [UserController::class, 'logout']);
+    // Route::post('refresh', [UserController::class, 'refresh']);
+    // Route::post('logout', [UserController::class, 'logout']);
+    Route::prefix('barang')->group(function() {
+        Route::get('/', [BarangController::class, 'index']);
+        Route::post('/store', [BarangController::class, 'store']);
+    });
 });
